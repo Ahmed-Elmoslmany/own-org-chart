@@ -1,0 +1,15 @@
+@import "tailwindcss";
+/* Default connection line  style between nodes */
+@import 'primereact/resources/primereact.min.css';
+@import 'primereact/resources/themes/lara-light-indigo/theme.css';
+
+/* Custom styling connection line between nodes */
+.p-organizationchart .p-organizationchart-line-down {
+    background: black !important;
+}
+.p-organizationchart .p-organizationchart-line-left {
+    border-right: 1px solid black !important;
+}
+.p-organizationchart .p-organizationchart-line-top {
+    border-top: 1px solid black !important;
+}
