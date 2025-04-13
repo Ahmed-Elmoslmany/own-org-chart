@@ -1,0 +1,193 @@
+ORM structure
+[
+    {
+        id: 1
+        label: "Ahmed",
+        expanded: true,
+        parentId: null
+    },
+    {
+        id: 2
+        label: "Mohamed",
+        expanded: true,
+        parentId: 1
+    },
+    {
+        id: 3
+        label: "Samy",
+        expanded: true,
+        parentId: 1
+    },
+    {
+        id: 4
+        label: "Attia",
+        expanded: true,
+        parentId: 1
+    },
+    {
+        id: 5
+        label: "Khail",
+        expanded: true,
+        parentId: 2
+    },
+    {
+        id: 6
+        label: "SmSm",
+        expanded: true,
+        parentId: 2
+    },
+    {
+        id: 7
+        label: "Elmoslmany",
+        expanded: true,
+        parentId: 2
+    },
+    {
+        id: 8
+        label: "mofsdg",
+        expanded: true,
+        parentId: 2
+    },
+    {
+        id: 9
+        label: "Argentina",
+        expanded: true,
+        parentId: 7
+    },
+    {
+        id: 10
+        label: "Egypt",
+        expanded: true,
+        parentId: 7
+    },
+    {
+        id: 11
+        label: "Argentina",
+        expanded: true,
+        parentId: 7
+    },
+    {
+        id: 12
+        label: "Indo",
+        expanded: true,
+        parentId: 7
+    },
+    {
+        id: 13
+        label: "Who",
+        expanded: true,
+        parentId: 11
+    },
+    {
+        id: 14
+        label: "How",
+        expanded: true,
+        parentId: 11
+    },
+]
+
+
+ORM structure Should manipulate to Org chart structure:
+[
+    {
+        id: 1,
+        label: "Ahmed",
+        expanded: true,
+        children: [
+            {
+                id: 2,
+                label: "Mohamed",
+                expanded: true,
+                children: [
+                    {
+                        id: 5,
+                        label: "Khail",
+                        expanded: true,
+                    },
+                    {
+                        id: 6,
+                        label: "SmSm",
+                        expanded: true,
+                    },
+                    {
+                        id: 7,
+                        label: "Elmoslmany",
+                        expanded: true,
+                        children: [
+                            {
+                                id: 9,
+                                label: "Argentina",
+                                expanded: true,
+                            },
+                            {
+                                id: 10,
+                                label: "Egypt",
+                                expanded: true,
+                            },
+                            {
+                                id: 11,
+                                label: "Argentina",
+                                expanded: true,
+                                children: [
+                                    {
+                                        id: 13,
+                                        label: "Who",
+                                        expanded: true,
+                                    },
+                                    {
+                                        id: 14,
+                                        label: "How",
+                                        expanded: true,
+                                    }
+                                ]
+                            },
+                            {
+                                id: 12,
+                                label: "Indo",
+                                expanded: true,
+                            }
+                        ]
+                    },
+                    {
+                        id: 8,
+                        label: "mofsdg",
+                        expanded: true,
+                    }
+                ]
+            },
+            {
+                id: 3,
+                label: "Samy",
+                expanded: true,
+                
+            },
+            {
+                id: 4,
+                label: "Attia",
+                expanded: true,
+                
+            }
+        ]
+    }
+]
+
+
+Convert ORM structure to Org chart structure
+const buildOrgChartStructure = (nodes) => {
+  const hashMap = {};
+  const orgChart = [];
+  
+  for (const node of nodes) {
+      hashMap[node.id] = { ...node, children: [] }; // Hashing nodes
+  }
+  
+  for (const node of nodes) {
+      if (node.parentId === null) {
+        orgChart.push(hashMap[node.id]);
+      } else {
+        const parent = hashMap[node.parentId];
+        parent.children.push(hashMap[node.id]);
+      }
+  }
+  return orgChart;
+}

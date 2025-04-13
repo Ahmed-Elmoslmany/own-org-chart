@@ -13,3 +13,14 @@
 .p-organizationchart .p-organizationchart-line-top {
     border-top: 1px solid black !important;
 }
+
+.organizationchart {
+    min-width: fit-content;
+    min-height: fit-content;
+}
+  
+  /* Ensure transform container doesn't create scrollbars */
+.react-transform-wrapper, 
+.react-transform-component {
+    overflow: visible !important;
+}
